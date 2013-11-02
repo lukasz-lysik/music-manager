@@ -1,0 +1,3 @@
+[submodule "musicbrainzngs"]
+	path = musicbrainzngs
+	url = https://github.com/alastair/python-musicbrainzngs.git

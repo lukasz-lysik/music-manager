@@ -6,6 +6,7 @@ import ttk
 from pymongo import MongoClient
 import musicbrainz
 
+
 class Prezenter:
     def __init__(self, model, view):
         self.model = model
@@ -14,7 +15,7 @@ class Prezenter:
     def init(self):
         self.view.set_artists(self.model.get_artists())
         self.view.init()
-        
+
 
 class View:
     def __init__(self):
@@ -31,7 +32,11 @@ class View:
                 continue
 
             for album in artist['albums']:
-                self.main_frame.insert_album(artist_node, album['name'], album['year'])
+                self.main_frame.insert_album(
+                    artist_node,
+                    album['name'],
+                    album['year'])
+
 
 class Model:
     def __init__(self):
@@ -41,11 +46,12 @@ class Model:
     def get_artists(self):
         return self.db.artists.find()
 
+
 class MainFrame(Frame):
     def __init__(self):
-        
+
         self.parent = Tk()
-        
+
         self.parent.geometry("250x150+300+300")
 
         Frame.__init__(self, self.parent)
@@ -72,11 +78,13 @@ class MainFrame(Frame):
     def start(self):
         self.parent.mainloop()
 
+
 def main():
     model = Model()
     view = View()
     prezenter = Prezenter(model, view)
     prezenter.init()
+
 
 if __name__ == '__main__':
     main()
